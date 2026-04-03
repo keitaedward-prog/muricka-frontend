@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import API from '../api';
 
@@ -12,21 +12,16 @@ function AddEditProduct() {
     images: [] // will store filenames
   });
   const [categories, setCategories] = useState([]);
-  const [imageFiles, setImageFiles] = useState([]);
+  // const [imageFiles, setImageFiles] = useState([]); // REMOVED - unused
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    fetchCategories();
-    if (id) fetchProduct();
-  }, [id]);
-
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     const res = await API.get('/categories');
     setCategories(res.data);
-  };
+  }, []);
 
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     setLoading(true);
     try {
       const res = await API.get(`/products/${id}`);
@@ -41,7 +36,12 @@ function AddEditProduct() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchCategories();
+    if (id) fetchProduct();
+  }, [id, fetchCategories, fetchProduct]); // Added fetchProduct to dependencies
 
   const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);

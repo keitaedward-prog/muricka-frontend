@@ -12,10 +12,8 @@ function SearchResults() {
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    if (query) {
-      fetchSearchResults();
-    }
-  }, [query, currentPage]);
+    fetchSearchResults();
+  }, [searchParams, fetchSearchResults]);
 
   const fetchSearchResults = async () => {
     setLoading(true);

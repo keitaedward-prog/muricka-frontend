@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import API from '../api';
 
@@ -13,11 +13,7 @@ function AddEditService() {
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (id) fetchService();
-  }, [id]);
-
-  const fetchService = async () => {
+  const fetchService = useCallback(async () => {
     setLoading(true);
     try {
       const res = await API.get(`/services/${id}`);
@@ -31,7 +27,11 @@ function AddEditService() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    if (id) fetchService();
+  }, [id, fetchService]); // Added fetchService to dependencies
 
   const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);

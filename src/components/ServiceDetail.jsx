@@ -18,7 +18,7 @@ function ServiceDetail() {
 
   useEffect(() => {
     fetchService();
-  }, [id]);
+  }, [id, fetchService]); // Added fetchService to dependencies
 
   const fetchService = async () => {
     try {
