@@ -23,7 +23,8 @@ function ProductCard({ product }) {
           {images.length > 0 ? (
             images.map((img, idx) => (
               <SwiperSlide key={idx}>
-                <img src={`http://localhost:5000/uploads/${img}`} alt={product.name} className="w-full h-full object-cover" />
+                {/* img is now the full Cloudinary URL */}
+                <img src={img} alt={product.name} className="w-full h-full object-cover" />
               </SwiperSlide>
             ))
           ) : (

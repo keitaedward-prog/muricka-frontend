@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
@@ -16,11 +16,7 @@ function ProductDetail() {
   const [imageModalOpen, setImageModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState('');
 
-  useEffect(() => {
-    fetchProduct();
-  }, [id, fetchProduct]);
-
-  const fetchProduct = async () => {
+  const fetchProduct = useCallback(async () => {
     try {
       const res = await API.get(`/products/${id}`);
       setProduct(res.data);
@@ -29,10 +25,14 @@ function ProductDetail() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]);
+
+  useEffect(() => {
+    fetchProduct();
+  }, [fetchProduct]);
 
   const openImage = (img) => {
-    setSelectedImage(`http://localhost:5000/uploads/${img}`);
+    setSelectedImage(img); // img is now the full Cloudinary URL
     setImageModalOpen(true);
   };
 
@@ -69,7 +69,7 @@ function ProductDetail() {
             {images.map((img, idx) => (
               <SwiperSlide key={idx}>
                 <img
-                  src={`http://localhost:5000/uploads/${img}`}
+                  src={img} // full Cloudinary URL
                   alt={`${product.name} ${idx + 1}`}
                   className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
                   onClick={() => openImage(img)}
