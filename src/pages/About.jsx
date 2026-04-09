@@ -57,11 +57,11 @@ function About() {
         <div className="space-y-3 text-gray-700">
           <p className="flex items-start gap-3">
             <span className="font-semibold min-w-[100px]">📍 Address:</span>
-            <span>7 John Lane, Off Campbell Street, Freetown, Sierra Leone</span>
+            <span>10 Upper Winchester Street, Regent, Freetown, Sierra Leone</span>
           </p>
           <p className="flex items-start gap-3">
             <span className="font-semibold min-w-[100px]">📞 Phone:</span>
-            <span>+23278625005/+23278004940</span>
+            <span>+23288759808/+23278004940</span>
           </p>
           <p className="flex items-start gap-3">
             <span className="font-semibold min-w-[100px]">📧 Email:</span>
