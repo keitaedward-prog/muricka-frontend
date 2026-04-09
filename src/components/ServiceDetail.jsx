@@ -31,8 +31,19 @@ function ServiceDetail() {
     }
   };
 
+  // Helper to get full image URL
+  const getImageUrl = (img) => {
+    // If it's already a full URL (Cloudinary or external), return as is
+    if (img.startsWith('http://') || img.startsWith('https://')) {
+      return img;
+    }
+    // Otherwise, assume it's a local filename and use the backend URL
+    const baseUrl = process.env.REACT_APP_API_URL?.replace('/api', '') || 'http://localhost:5000';
+    return `${baseUrl}/uploads/${img}`;
+  };
+
   const openImage = (img) => {
-    setSelectedImage(`http://localhost:5000/uploads/${img}`);
+    setSelectedImage(getImageUrl(img));
     setImageModalOpen(true);
   };
 
@@ -64,7 +75,7 @@ function ServiceDetail() {
             {images.map((img, idx) => (
               <SwiperSlide key={idx}>
                 <img
-                  src={`http://localhost:5000/uploads/${img}`}
+                  src={getImageUrl(img)}
                   alt={`${service.name} ${idx + 1}`}
                   className="w-full h-48 object-cover rounded-lg cursor-pointer hover:opacity-80 transition"
                   onClick={() => openImage(img)}

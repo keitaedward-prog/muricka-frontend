@@ -41,7 +41,7 @@ function About() {
         <p className="text-gray-700 italic mt-2">"Our approach to work begins with our attitude towards client's ideas."</p>
       </div>
 
-      <div className="bg-white rounded-xl shadow-md p-6">
+      <div className="bg-white rounded-xl shadow-md p-6 mb-6">
         <h2 className="text-2xl font-semibold text-deep-cobalt mb-3">Experience & Clients</h2>
         <p className="text-gray-700 mb-2">
           With over 20 years of expertise, a highly skilled team, and a commitment to excellence, we pride ourselves on our ability to provide seamless procurement solutions.
@@ -49,6 +49,34 @@ function About() {
         <p className="text-gray-700">
           We have successfully supported both Public and Private sector including: Office of the Vice President, Save The Children, Rokel Clearing and Forwarding, Bank of Sierra Leone, and many more.
         </p>
+      </div>
+
+      {/* New Contact Information Section */}
+      <div className="bg-white rounded-xl shadow-md p-6">
+        <h2 className="text-2xl font-semibold text-deep-cobalt mb-4">Contact Information</h2>
+        <div className="space-y-3 text-gray-700">
+          <p className="flex items-start gap-3">
+            <span className="font-semibold min-w-[100px]">📍 Address:</span>
+            <span>7 John Lane, Off Campbell Street, Freetown, Sierra Leone</span>
+          </p>
+          <p className="flex items-start gap-3">
+            <span className="font-semibold min-w-[100px]">📞 Phone:</span>
+            <span>+23278625005/+23278004940</span>
+          </p>
+          <p className="flex items-start gap-3">
+            <span className="font-semibold min-w-[100px]">📧 Email:</span>
+            <span>info@murickaenterprises.com</span>
+          </p>
+          <p className="flex items-start gap-3">
+            <span className="font-semibold min-w-[100px]">🕒 Hours:</span>
+            <span>Monday – Friday: 9:00 AM – 6:00 PM<br />Saturday: 10:00 AM – 2:00 PM<br />Sunday: Closed</span>
+          </p>
+        </div>
+        <div className="mt-4 pt-4 border-t border-gray-200">
+          <p className="text-sm text-gray-500">
+            For enquiries, please use the <strong>General Enquiry</strong> button on our website, or email us directly.
+          </p>
+        </div>
       </div>
     </div>
   );
