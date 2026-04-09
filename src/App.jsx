@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './pages/Home';
+import About from './pages/About'; // Added import
 import ProductDetail from './components/ProductDetail';
 import ServiceDetail from './components/ServiceDetail';
 import SearchResults from './components/SearchResults';
@@ -11,7 +12,7 @@ import ManageCategories from './pages/ManageCategories';
 import ManageProducts from './pages/ManageProducts';
 import ManageServices from './pages/ManageServices';
 import AddEditProduct from './pages/AddEditProduct';
-import AddEditService from './pages/AddEditService'; // new import
+import AddEditService from './pages/AddEditService';
 import ManageAdmins from './pages/ManageAdmins';
 import { AuthProvider } from './context/AuthContext';
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
+            <Route path="about" element={<About />} /> {/* New route */}
             <Route path="product/:id" element={<ProductDetail />} />
             <Route path="service/:id" element={<ServiceDetail />} />
             <Route path="search" element={<SearchResults />} />

@@ -18,7 +18,7 @@ function ServiceDetail() {
 
   useEffect(() => {
     fetchService();
-  }, [id, fetchService]); // Added fetchService to dependencies
+  }, [id]);
 
   const fetchService = async () => {
     try {
@@ -53,7 +53,6 @@ function ServiceDetail() {
       </div>
 
       <h1 className="text-4xl font-bold text-deep-cobalt mb-4">{service.name}</h1>
-
       <div className="prose max-w-none mb-8">
         <p className="text-gray-700 whitespace-pre-line">{service.description}</p>
       </div>

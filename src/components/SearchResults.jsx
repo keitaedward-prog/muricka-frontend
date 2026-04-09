@@ -5,15 +5,17 @@ import API from '../api';
 
 function SearchResults() {
   const [searchParams] = useSearchParams();
-  const query = searchParams.get('q');
+  const query = searchParams.get('q') || '';
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
-    fetchSearchResults();
-  }, [searchParams, fetchSearchResults]);
+    if (query) {
+      fetchSearchResults();
+    }
+  }, [query, currentPage]);
 
   const fetchSearchResults = async () => {
     setLoading(true);
@@ -24,7 +26,7 @@ function SearchResults() {
       setProducts(res.data.products);
       setTotalPages(res.data.pages);
     } catch (error) {
-      console.error(error);
+      console.error('Search error:', error);
     } finally {
       setLoading(false);
     }
@@ -34,10 +36,19 @@ function SearchResults() {
 
   return (
     <div>
-      <h2 className="text-2xl font-bold text-deep-cobalt mb-6">
-        Search results for: "{query}" ({products.length} found)
+      <h2 className="text-2xl font-bold text-deep-cobalt mb-4">
+        Search results for: "{query}"
       </h2>
-      <ProductGrid products={products} totalPages={totalPages} currentPage={currentPage} onPageChange={setCurrentPage} />
+      {products.length === 0 ? (
+        <div className="text-center py-10 text-gray-500">No products found.</div>
+      ) : (
+        <ProductGrid
+          products={products}
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={setCurrentPage}
+        />
+      )}
     </div>
   );
 }
