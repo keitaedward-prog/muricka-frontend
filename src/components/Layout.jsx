@@ -41,13 +41,12 @@ function Layout() {
     }
   };
 
-  // Close sidebar when clicking a link on mobile
   const closeSidebar = () => {
     if (window.innerWidth < 768) setSidebarOpen(false);
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50">
       {/* Mobile Hamburger Button */}
       <button
         onClick={() => setSidebarOpen(!sidebarOpen)}
@@ -56,7 +55,7 @@ function Layout() {
         {sidebarOpen ? '✕' : '☰'}
       </button>
 
-      {/* Sidebar - hidden on mobile unless open, always visible on desktop */}
+      {/* Sidebar - Fixed position, scrolls independently */}
       <aside
         className={`fixed md:relative z-40 w-72 bg-deep-cobalt text-white shadow-xl h-full overflow-y-auto transition-transform duration-300 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
@@ -75,7 +74,7 @@ function Layout() {
         <Sidebar categories={categories} services={services} onLinkClick={closeSidebar} />
       </aside>
 
-      {/* Overlay for mobile when sidebar is open */}
+      {/* Overlay for mobile */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 md:hidden"
@@ -83,9 +82,9 @@ function Layout() {
         />
       )}
 
-      {/* Right Content Area */}
-      <div className="flex-1 w-full md:ml-0">
-        {/* Top Bar */}
+      {/* Right Content Area - Scrolls independently */}
+      <div className="flex-1 flex flex-col h-full overflow-y-auto">
+        {/* Top Bar - Sticky inside scrollable area */}
         <div className="bg-white shadow-sm p-4 flex flex-wrap justify-between items-center sticky top-0 z-20">
           <form onSubmit={handleSearch} className="flex-1 max-w-md ml-8 md:ml-0">
             <input
@@ -97,7 +96,6 @@ function Layout() {
             />
           </form>
           <div className="flex gap-2 mt-2 md:mt-0">
-            {/* About Us link will go here */}
             <a href="/about" className="bg-gray-200 text-deep-cobalt px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition">
               About Us
             </a>
@@ -106,7 +104,7 @@ function Layout() {
         </div>
 
         {/* Main Content */}
-        <main className="p-6">
+        <main className="p-6 flex-1">
           <Outlet />
         </main>
       </div>
